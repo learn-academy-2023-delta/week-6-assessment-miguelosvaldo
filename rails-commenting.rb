@@ -32,13 +32,13 @@ class BlogPostsController < ApplicationController
   end
 
   def edit
-    # ---6)
+    # ---6) Here we an object that can be edited, finding it by the id.
     @post = BlogPost.find(params[:id])
   end
 
   def update
     @post = BlogPost.find(params[:id])
-    # ---7)
+    # ---7)//Below certain updates will occur depending on the params past through
     @post.update(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -48,15 +48,15 @@ class BlogPostsController < ApplicationController
   def destroy
     @post = BlogPost.find(params[:id])
     if @post.destroy
-      # ---8)
+      # ---8)//Below it is a route helper, that will redirect after deleting a post
       redirect_to blog_posts_path
     end
   end
 
-  # ---9)
+  # ---9) // This is a string parameter, it will provide extra security 
   private
   def blog_post_params
-    # ---10)
+    # ---10)//if any parameters are missing, there will be errors turned on
     params.require(:blog_post).permit(:title, :content)
   end
 end
